@@ -8,22 +8,35 @@
       .message { font-size: 1.3em; font-weight: bold; }
     </style>
   </head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <body>
-   <div class="container">
+   <div class="container" ng-app="myApp" ng-controller="myCtrl">
      <h1>Lunch Checker</h1>
 
          <div class="form-group">
              <input id="lunch-menu" type="text"
+             ng-model="lunchItems"
              placeholder="list comma separated dishes you usually have for lunch"
              class="form-control">
          </div>
          <div class="form-group">
-             <button class="btn btn-default">Check If Too Much</button>
+             <button ng-click="myFunc()" class="btn btn-default">Check If Too Much</button>
          </div>
          <div class="form-group message">
-           <!-- Your message can go here. -->
+          {{ message }}
          </div>
    </div>
+
+   <script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope) {
+        $scope.message = ""; // $scope.lunchItems.split(',').length > 3 ? "Too much!" : "Enjoy!";
+        $scope.myFunc = function() {
+          console.log("wefwefwe")
+          $scope.message = $scope.lunchItems? ($scope.lunchItems.split(',').length > 3 ? "Too much!" : "Enjoy!"): 'Please enter data first';
+    };
+    });
+    </script> 
 
 </body>
 </html>
