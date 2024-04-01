@@ -22,32 +22,70 @@
       }
     </style>
   </head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <body>
-  <div class="container">
+  <div class="container" ng-app="myApp" ng-controller="myCtrl">
   <h1>Shopping List Check Off</h1>
 
   <div class="row">
 
     <!-- To Buy List -->
     <div class="col-md-6">
-     <h2>To Buy:</h2>
-     <ul>
-       <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
-       <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
-     </ul>
-     <div class="emptyMessage">Everything is bought!</div>
+      <h2>To Buy:</h2>
+      <ul>
+        <li ng-repeat="item in toBuyList">Buy {{item.quantity}} {{item.name}} <button class='btn btn-default' ng-click='buy($index)'><span class='glyphicon glyphicon-ok'></span> Bought</button></li>
+      </ul>
+      
+      <div class="emptyMessage"> {{emptyMessage}} </div>
     </div>
-
     <!-- Already Bought List -->
     <div class="col-md-6">
      <h2>Already Bought:</h2>
-     <ul>
-       <li>Bought 10 cookies</li>
+      <ul>
+        <li ng-repeat="item in boughtList">Bought {{item.quantity}} {{item.name}}</li>
+      </ul>
+     
      </ul>
-     <div class="emptyMessage">Nothing bought yet.</div>
+     <div class="emptyMessage"> {{boughtListMessage}} </div>
     </div>
   </div>
 </div>
+
+  <script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope) {
+      $scope.toBuyList = [
+        { name: "cookies", quantity: 10 },
+        { name: "milk", quantity: 5 },
+        { name: "coke", quantity: 10 },
+        { name: "bread", quantity: 10 },
+        { name: "coconut", quantity: 7 }
+      ];
+
+      $scope.emptyMessage = "";
+      $scope.boughtList = [];
+      $scope.boughtListHtml = $scope.boughtList.map(function(item) {
+        return "<li>Bought " + item.quantity + " " + item.name;
+      }).join("");
+      $scope.boughtListMessage = "Nothing bought yet.";
+
+      $scope.toBuyListHtml = $scope.toBuyList.map(function(item, index) {
+        return `<li>Buy ${item.quantity} ${item.name} <button class='btn btn-default' ng-click='buy(${index})'><span class='glyphicon glyphicon-ok'></span> Bought</button></li>`;
+      }).join("");
+
+      $scope.buy = function(index) {
+        $scope.boughtList.push($scope.toBuyList[index]);
+        $scope.toBuyList.splice(index, 1);
+        if ($scope.toBuyList.length == 0) {
+          $scope.emptyMessage = "Everything is bought!";
+        }
+        if($scope.boughtList.length > 0) {
+          $scope.boughtListMessage = "";
+        }
+      };
+    });
+
+  </script> 
 
 </body>
 </html>
