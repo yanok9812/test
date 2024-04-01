@@ -42,7 +42,7 @@
     <div class="col-md-6">
      <h2>Already Bought:</h2>
       <ul>
-        <li ng-repeat="item in boughtList">Bought {{item.quantity}} {{item.name}}</li>
+        <li ng-repeat="item in boughtList">Bought {{item.quantity}} {{item.name}} for Total Price: $$${{item.quantity * item.pricePerItem}}</li>
       </ul>
      
      </ul>
@@ -55,11 +55,11 @@
     var app = angular.module('myApp', []);
     app.controller('myCtrl', function($scope) {
       $scope.toBuyList = [
-        { name: "cookies", quantity: 10 },
-        { name: "milk", quantity: 5 },
-        { name: "coke", quantity: 10 },
-        { name: "bread", quantity: 10 },
-        { name: "coconut", quantity: 7 }
+        { name: "cookies", quantity: 10, pricePerItem: 5 },
+        { name: "milk", quantity: 5, pricePerItem: 7 },
+        { name: "coke", quantity: 10, pricePerItem: 2 },
+        { name: "bread", quantity: 10, pricePerItem: 1 },
+        { name: "coconut", quantity: 7, pricePerItem: 8 }
       ];
 
       $scope.emptyMessage = "";
