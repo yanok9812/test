@@ -33,7 +33,7 @@
     <div class="col-md-6">
       <h2>To Buy:</h2>
       <ul>
-        <li ng-repeat="item in toBuyList">Buy {{item.quantity}} {{item.name}} <button class='btn btn-default' ng-click='buy($index)'><span class='glyphicon glyphicon-ok'></span> Bought</button></li>
+        <li ng-repeat="item in toBuyList">Buy <input type="number" ng-model="item.quantity"> {{item.name}} <button class='btn btn-default' ng-click='buy($index)'><span class='glyphicon glyphicon-ok'></span> Buy </button></li>
       </ul>
       
       <div class="emptyMessage"> {{emptyMessage}} </div>
