@@ -9,6 +9,14 @@ input[type="text"] {
   float: left;
   margin-left: 10px;
 }
+.menu-items {
+  margin-top: 80px;
+}
+
+.menu-item {
+  margin-bottom: 10px;
+}
+
 .loader {
   display: none;
   margin-left: 5px;
