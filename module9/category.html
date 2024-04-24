@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Categories</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body ng-app="myApp" >
+<div *ngFor="let category of categories" ng-controller="myController">
+  <ul>
+    <li ng-repeat="item in categories"><a ng-href="/category/{{ item.name }}">{{ item.name }}</a></li>
+    <!-- Add more categories here -->
+  </ul>
+  <script>
+    angular.module('myApp', [])
+      .controller('myController', function($scope, $http) {
+        $http.get(' https://coursera-jhu-default-rtdb.firebaseio.com/categories.json')
+          .then(function(response) {
+            console.log(response.data);
+            $scope.categories = response.data;
+          });
+      });
+  </script>
+</div>
+</body>
+</html>
