@@ -7,7 +7,7 @@
 <body ng-app="myApp">
 <div *ngFor="let category of categories" ng-controller="myController">
   <ul>
-    <li ng-repeat="item in categories"> {{ item.name }} </li>
+    <li ng-repeat="item in menu_items"> {{ item.name }} - {{ item.name }} - ${{ item.price }} </li>
     <!-- Add more categories here -->
   </ul>
   <script>
@@ -19,7 +19,7 @@
         $http.get(`https://coursera-jhu-default-rtdb.firebaseio.com/menu_items/${categoryShortName}.json`)
           .then(function(response) {
             console.log(response.data);
-            $scope.categories = response.data;
+            $scope.menu_items = response.data.menu_items;
           });
       });
   </script>
