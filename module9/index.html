@@ -15,6 +15,9 @@
     angular.module('myApp', ['ngRoute'])
       .config(function($routeProvider) {
         $routeProvider
+          .when('/', {
+            templateUrl: 'home.html'
+          })
           .when('/category', {
             templateUrl: 'category.html'
           })
