@@ -7,7 +7,7 @@
 <body ng-app="myApp">
 <div *ngFor="let category of categories" ng-controller="myController">
   <ul>
-    <li ng-repeat="item in menu_items"> {{ item.name }} - {{ item.name }} - ${{ item.price }} </li>
+    <li ng-repeat="item in menu_items"> {{ item.name }} - {{ item.name }} </li>
     <!-- Add more categories here -->
   </ul>
   <script>
