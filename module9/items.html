@@ -4,16 +4,18 @@
   <title>Categories</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
-<body ng-app="myApp" >
+<body ng-app="myApp">
 <div *ngFor="let category of categories" ng-controller="myController">
   <ul>
-    <li ng-repeat="item in categories"><a ng-href="/items?category={{ item.short_name }}">{{ item.short_name }}</a></li>
+    <li ng-repeat="item in categories"> {{ item.name }} </li>
     <!-- Add more categories here -->
   </ul>
   <script>
     angular.module('myApp', [])
       .controller('myController', function($scope, $http) {
-        $http.get('https://coursera-jhu-default-rtdb.firebaseio.com/categories.json')
+        var url = window.location.pathname;
+        var categoryShortName = url.substring(url.lastIndexOf('/') + 1);
+        $http.get(`https://coursera-jhu-default-rtdb.firebaseio.com/menu_items/${categoryShortName}.json`)
           .then(function(response) {
             console.log(response.data);
             $scope.categories = response.data;
