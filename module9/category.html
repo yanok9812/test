@@ -7,7 +7,7 @@
 <body ng-app="myApp" >
 <div *ngFor="let category of categories" ng-controller="myController">
   <ul>
-    <li ng-repeat="item in categories"><a ng-href="../items?category={{ item.short_name }}">{{ item.name }}</a></li>
+    <li ng-repeat="item in categories"><a ng-href="./items?category={{ item.short_name }}">{{ item.name }}</a></li>
     <!-- Add more categories here -->
   </ul>
   <script>
